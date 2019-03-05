@@ -34,7 +34,7 @@ include 'Database/Forms/Login - Registreer/server.php';
                     </li>
                     <li class="nav-item">
                         <?php if(isset($_SESSION['login']) && $_SESSION['userType'] == 0){ ?>
-                            <a class="nav-link" href="insert_Effect.php"><?php echo 'Relations'; ?></a>
+                            <a class="nav-link" href="relations.php"><?php echo 'Relations'; ?></a>
                         <?php } ?>
                     </li>
                     <li class="nav-item">

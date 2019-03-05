@@ -11,11 +11,12 @@ if (isset($_POST['update_user']) && isset($_POST['update_username']) && isset($_
     $password = $_POST['update_password'];
     $adminornot = $_POST['adminOrNot'];
     
-    //var_dump($causeName);
-    //var_dump($causeId);
-    //print("itworks");
-    UserDB::updateUser();
-    header('location: index.php');    
+    print($userid);
+    print($username);
+    print($password);
+    print($adminornot);
+    UserDB::updateUser($username,$password,$adminornot,$userid);
+    header('location: manageUser.php');    
     
 }else{
     print("camarchepas");

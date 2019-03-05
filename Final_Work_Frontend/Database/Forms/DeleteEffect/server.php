@@ -6,6 +6,7 @@
  * Time: 17:56
  * Logica komt van hier: https://codewithawa.com/posts/complete-user-registration-system-using-php-and-mysql-database
  */
+include_once './Database/DAO/CauseDB.php';
 include_once './Database/DAO/EffectDB.php';
 
 if (isset($_POST['delete_effect']) && isset($_POST['delete_idEffect'])) {

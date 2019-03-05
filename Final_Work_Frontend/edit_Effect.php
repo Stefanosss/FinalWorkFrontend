@@ -2,7 +2,8 @@
 
 session_start();
 
-include_once './Database/DAO/UserDB.php';
+include_once './Database/DAO/EffectDB.php';
+include 'Database/Forms/UpdateEffect/server.php';
 
 ?>
 
@@ -36,8 +37,8 @@ include_once './Database/DAO/UserDB.php';
                         </a>
                     </li>
                     <li class="nav-item">
-                        <?php if(isset($_SESSION['login']) && $_SESSION['userType'] == 1){ ?>
-                            <a class="nav-link" href="insert_Effect.php"><?php echo 'Relations'; ?></a>
+                        <?php if(isset($_SESSION['login']) && $_SESSION['userType'] == 0){ ?>
+                            <a class="nav-link" href="relations.php"><?php echo 'Relations'; ?></a>
                         <?php } ?>
                     </li>
                     <li class="nav-item">
@@ -68,27 +69,24 @@ include_once './Database/DAO/UserDB.php';
                                 
     
     <div class="container" style="width: 50%; float: left">
-        <h1>Update User</h1>
-            <?php $user = UserDB::getById($_GET['userId']); ?>
+        <h1>Update Effect</h1>
+            <?php $effect = EffectDB::getById($_GET['idEffect']); ?>
             
-    <?php foreach($user as $u) { ?>
-        
-        <form method="post" action="editUserForm.php">
-            <div class="form-group">
-                <input type="hidden" value="<?php echo $u->userId; ?>" name="userId"/>
-                <label>Username:</label><br>
-                <input class="col-lg-4" value="<?php echo $u->username; ?>" name="update_username"><br><br>
-                <label>Password:</label><br>
-                <input type="password" class="col-lg-4" value="<?php echo $u->password; ?>" name="update_password"><br><br>
-                <label>Role:</label><br>
-                <select name="adminOrNot">
-                    <option value="0">Admin</option>
-                    <option value="1">Normal user</option>
+    <?php foreach($effect as $e) { ?>
+        <div>
+            <form method="post" action="edit_Effect.php">
+                <input type="hidden" value="<?php echo $e->idEffect; ?>" name="effectid"/>
+                <label>Effect name: </label><br>
+                <input class="col-lg-4" value="<?php echo $e->EffectName; ?>" name="update_effectname"><br><br>
+                <label>Status:</label><br>
+                <select name="update_effectstatus">
+                    <option value="0">In queue</option>
+                    <option value="1">Approved without Cause</option>
+                    <option value="2">Fully Approved</option>
                 </select><br><br>
-                <button type="submit" class="btn btn-primary" name="update_user">Submit</button>
-            </div>
-        </form>
-        
+                <button type="submit" class="btn btn-primary" name="update_effect">Submit</button>
+            </form>
+        </div>
     <?php } ?>
     </div>
     
@@ -100,7 +98,7 @@ include_once './Database/DAO/UserDB.php';
     
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="Bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../Users/Dries/Downloads/Final_Work_Frontend/Bootstrap/js/bootstrap.min.js"></script>
     
 </body>
 

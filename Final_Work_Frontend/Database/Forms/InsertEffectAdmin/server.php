@@ -1,26 +1,15 @@
 <?php
 
-include_once 'Database/DAO/EffectDB.php';
+include_once './Database/DAO/EffectDB.php';
 
 
 if (isset($_POST['insert_effect_admin'])) {
     
     $EffectName = $_POST['EffectName'];
-    
-   
     if (isset($EffectName) && !empty($EffectName))
     {
-        
         //$newUser = new User(null,$username,$password,1);
         EffectDB::insertNewEffect($EffectName,1);
-        header('location: index.php');
-        
-        
-    }else{
-        
-        header('location: index.php');
-
-        
     }
 }
 

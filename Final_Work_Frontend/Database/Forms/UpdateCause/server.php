@@ -8,10 +8,8 @@ if (isset($_POST['update_cause']) && isset($_POST['update_causename']) && isset(
     $causeName = $_POST['update_causename'];
     $causeId = $_POST['causeid'];
     
-    var_dump($causeName);
-    var_dump($causeId);
-    print("itworks");
-    CauseDB::updateCause();
+    
+    CauseDB::update($causeName, $causeId);
     header('location: index.php');    
     
 }else{

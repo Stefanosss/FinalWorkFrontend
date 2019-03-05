@@ -37,8 +37,13 @@ include_once './Database/DAO/ErrorDB.php';
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <?php if(isset($_SESSION['login']) && $_SESSION['userType'] == 1){ ?>
-                            <a class="nav-link" href="insert_Effect.php"><?php echo 'Relations'; ?><span class="sr-only">(current)</span></a>
+                        <?php if(isset($_SESSION['login']) && $_SESSION['userType'] == 0){ ?>
+                            <a class="nav-link" href="relations.php"><?php echo 'Relations'; ?><span class="sr-only">(current)</span></a>
+                        <?php } ?>
+                    </li>
+                    <li class="nav-item active">
+                        <?php if(isset($_SESSION['login']) && $_SESSION['userType'] == 0){ ?>
+                            <a class="nav-link" href="manage_status_effect.php"><?php echo 'Status Effect'; ?><span class="sr-only">(current)</span></a>
                         <?php } ?>
                     </li>
                     <li class="nav-item">
@@ -76,7 +81,7 @@ include_once './Database/DAO/ErrorDB.php';
         </form>
     </div>
     
-    <div class="container" style="width: 50%; float: left">
+    <div class="container" style="width: 50%; float: left;overflow: auto; height: 500px;">
         <h1>Effects</h1>
         <table class="table table-bordered table-hover">
             <thead>
@@ -99,7 +104,7 @@ include_once './Database/DAO/ErrorDB.php';
     
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="Bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../Users/Dries/Downloads/Final_Work_Frontend/Bootstrap/js/bootstrap.min.js"></script>
     
 </body>
 

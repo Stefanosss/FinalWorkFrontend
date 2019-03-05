@@ -38,6 +38,17 @@ class ClusterDB
         }
         return $resultatenArray;
     }
+    
+    public static function getSearchCluster($searchq) {
+        $resultatenArray = array();
+        $resultaat = self::getVerbinding()->voerSqlQueryUit("select * from Cluster where Cause_idCause LIKE '%$searchq%'");
+        for ($index = 0; $index < $resultaat->num_rows; $index++) {
+            $databaseRij = $resultaat->fetch_array();
+            $nieuw = self::converteerRijNaarCluster($databaseRij);
+            $resultatenArray[$index] = $nieuw;
+        }
+        return $resultatenArray;
+    }
 
     public static function insert($causeid, $array) {
         $string = self::arrayToClusterEffects($array);
@@ -54,6 +65,18 @@ class ClusterDB
         return $string;
     }
 
+    public static function ifExists($causeid, $array){
+        $string = self::arrayToClusterEffects($array);
+        $mysqli = new mysqli("dt5.ehb.be", "1819FW_DRIESD_STEFANOSS", "DzwWqw", "1819FW_DRIESD_STEFANOSS");
+        $result = $mysqli->query("SELECT * FROM Cluster WHERE Cause_idCause=".$causeid." AND Cluster_Effects= '$string'");
+        if($result->num_rows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+        $mysqli->close();
+    }
+
     public static function updateClusterCause($idCluster,$causeid) {
         return self::getVerbinding()->voerSqlQueryUit("UPDATE Cluster SET Cause_idCause=".$causeid." WHERE idCluster=".$idCluster);
     }
@@ -68,8 +91,21 @@ class ClusterDB
     }
 
 
+    public static function translateStringToEffects($string){
+        preg_match_all('!\d+!', $string, $matches);
+        return $matches[0];
+    }
+
 
     protected static function converteerRijNaarCluster($databaseRij) {
         return new Cluster($databaseRij['idCluster'], $databaseRij['Cause_idCause'], $databaseRij['Cluster_Effects']);
+    }
+
+    protected static function converteerRijNaarEffect($databaseRij) {
+        return new Effect($databaseRij['idEffect'], $databaseRij['EffectName'], $databaseRij['EffectStatus'], $databaseRij['Error_idError']);
+    }
+
+    protected static function converteerRijNaarCause($databaseRij) {
+        return new Cause($databaseRij['idCause'], $databaseRij['CauseName']);
     }
 }
