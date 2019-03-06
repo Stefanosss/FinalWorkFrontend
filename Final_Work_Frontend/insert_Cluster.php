@@ -122,7 +122,8 @@ if(isset($_POST['searchEffectCluster'])){
 
     <div class="container" style="width: 50%; float: left; height: 500px;">
         <h1>Insert Cluster</h1>
-        
+        <?php $deIdvoorDriesMijnKapoentje = EffectDB::getById(($_GET['update_idEffect_one'])); 
+        ?>
         <form method="post" action="insert_Cluster.php">
             <h2>Causes</h2>
             <input type="text" name="searchCause" placeholder="Search for causes...">

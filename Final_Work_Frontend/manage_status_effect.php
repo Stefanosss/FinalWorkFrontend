@@ -125,7 +125,10 @@ include_once './Database/DAO/ErrorDB.php';
                 <th>#</th>
                 <th>Effect</th>
                 <?php  if(isset($_SESSION['login']) && $_SESSION['userType'] == 0){   ?>
-                <th>Approve</th>
+                <th>Go Cluster</th>
+                <?php } ?>
+                <?php  if(isset($_SESSION['login']) && $_SESSION['userType'] == 0){   ?>
+                <th>Go insert Cause-Effect</th>
                 <?php } ?>
             </tr>
             </thead>
@@ -137,9 +140,17 @@ include_once './Database/DAO/ErrorDB.php';
                     <td><?php echo $effects[$e]->EffectName ?></td>
                     <?php  if(isset($_SESSION['login']) && $_SESSION['userType'] == 0){   ?>
                     <td>
-                        <form method="post" action="manage_status_effect.php">
+                        <form method="get" action="manage_status_effect.php">
                         <input type="hidden" value="<?php echo $effects[$e]->idEffect?>" name="update_idEffect_one">
                         <a href="insert_Cluster.php?idEffect=<?php echo $effects[$e]->idEffect; ?>" class="btn btn-primary">Go Cluster</a>
+                        </form>
+                    </td>
+                    <?php } ?>
+                    <?php  if(isset($_SESSION['login']) && $_SESSION['userType'] == 0){   ?>
+                    <td>
+                        <form method="get" action="manage_status_effect.php">
+                        <input type="hidden" value="<?php echo $effects[$e]->idEffect?>" name="update_idEffect_two">
+                        <a href="insert_Cause_Effect.php?idEffect=<?php echo $effects[$e]->idEffect; ?>" class="btn btn-primary">Go insert Cause effect</a>
                         </form>
                     </td>
                     <?php } ?>

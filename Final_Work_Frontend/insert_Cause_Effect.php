@@ -23,7 +23,7 @@ if(isset($_POST['searchCause'])){
     $searchqf = preg_replace_callback("#[^0-9a-z]#i","", $searchqf);
     
     $querySearchCauseInsertCluster = CauseDB::getSearchCause($searchqf);
-    
+     
 //     if(isset($querySearchCause))  {
 //
 //        $output .= '
@@ -121,6 +121,7 @@ if(isset($_POST['searchEffectCluster'])){
 
     <div class="container" style="width: 50%; float: left; height: 80%;">
         <h1>Insert Cause - Effect</h1>
+        <?php $deIdvoorDriesMijnKapoentje = EffectDB::getById(($_GET['update_idEffect_two'])); ?>
         <form method="post" action="insert_Cause_Effect.php">
             <h2>Causes</h2>
             <input type="text" name="searchCause" placeholder="Search for causes...">
